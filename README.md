@@ -1,4 +1,4 @@
-# Predicting the Price of Exchange Traded Funds With LSTM Using Tensor Flow and Keras
+# Predicting the Price of Exchange Traded Funds With LSTM Using TensorFlow and Keras
 
 ## <em>A model to predict the unpredictable</em>
 
@@ -44,7 +44,7 @@ After it's joined we'll have NaN's for any day past the first of this month, as 
 
 #### VTI and Holdings
 
-Preparing the VTI and top 10 holding data is fairly stright forward. First we can simply concatenate the 'Close' series from each dataframe together using an outer join. Because they all have identical timeseries indexes they will line up with each other nicely.
+Preparing the VTI and top 10 holding data is fairly straightforward. First we can simply concatenate the 'Close' series from each data frame together using an outer join. Because they all have identical time series indexes they will line up with each other nicely.
 
 Because we only care about the data related to our target we can truncate the dataframe to start when that data starts ('June 15th, 2001')
 
@@ -58,7 +58,7 @@ If this information is pulled during the day, the dow may not have been reported
 
 ### Scaling
 
-In order to use an LSTM model in keras you must scale your data. Because it's important to include as much of the information as posible I used a MinMaxScaler as opposed to a RobustScaler, and because the distribution of values isn't normal we couldn't use a StandardScaler.
+In order to use an LSTM model in keras you must scale your data. Because it's important to include as much of the information as possible I used a MinMaxScaler as opposed to a RobustScaler, and because the distribution of values isn't normal we couldn't use a StandardScaler.
 
 # Modeling
 
@@ -78,15 +78,15 @@ Our LSTM model did substantially better though, achieving a root mean squared er
 <img src='images/lstm_preds_vs_true.png'>
 </p>
 
-It's clear that the LSTM model picks up much more of the changes to the price when the pandemic caused it to fluxuate wildly.
+It's clear that the LSTM model picks up much more of the changes to the price when the pandemic caused it to fluctuate wildly.
 
-To see how this would work as an investement strategy I created a funtion to turn the predictions into binary values showing either whether the next days price would be higher or lower, and then created a function to invest or sell based on the predictions. Despite picking up on trends, it would not be a successful investement strategy, gardnering $848.18, while just buying and holding over the saewould have your shares worth $1,177.40.
+To see how this would work as an investment strategy I created a function to turn the predictions into binary values showing either whether the next day's price would be higher or lower, and then created a function to invest or sell based on the predictions. Despite picking up on trends, it would not be a successful investment strategy, garnering only $848.18, whereas just buying and holding over the same period of time would leave you with shares worth $1,177.40.
 
 ### LSTM Rolling Predictions
 
 In practice, what we would want to do is train using all data up through today, and then predict the price for tomorrow. To see how this would compare with our benchmark and our split LSTM model.
 
-To emulate the process of making predictions over this time, we created a loop that iterated through the time period and consistenly trained a new model based on the new history.
+To emulate the process of making predictions over this time, we created a loop that iterates through the time period and constantly trained a new model based on the new history.
 
 The results of this method were less accurate than one would think. We got an RMSE of 31.13 and an MAE of 26.19. Our graph shows how inconsistent the predictions were.
 
@@ -94,7 +94,7 @@ The results of this method were less accurate than one would think. We got an RM
 <img src='images/up_to_date_preds_vs_true.png'>
 </p>
 
-Using this as an investement strategy, however, was even more surprising. Despite having poor evaluation metrics, investing based on these predictions would leave us with $1361.85, as opposed to the $1191.09
+Using this as an investment strategy, however, was even more surprising. Despite having poor evaluation metrics, investing based on these predictions would leave us with $1361.85, as opposed to the $1191.09
 
 (note, fluxuation in the price of VTI between running these models changed what the ending value would be.)
 
