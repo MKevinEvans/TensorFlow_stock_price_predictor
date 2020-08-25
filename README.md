@@ -1,6 +1,6 @@
 # Predicting the Price of Exchange Traded Funds With LSTM Using TensorFlow and Keras
 
-## <em>A model to predict the unpredictable</em>
+## <em>Predicting Associated Change Over Time</em>
 
 So many interesting metrics in life are predicated on their history. To tell the truth, I don't find stocks to be nearly as interesting as topics like people's interest over time, preferences over time, and general behavioral change over time. However, an accessible public stream of this data is not easy to find (if it's even possible). Knowing that methods are largely the same regardless of the data, I decided to use stock data, specifically an ETF (VTI) which is an amalgamation of multiple holdings.
 
